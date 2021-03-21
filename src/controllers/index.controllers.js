@@ -1,6 +1,6 @@
 const crypto = require('crypto');
-const { response } = require('express');
-const sequelize = require('../config/dataBase/index');
+
+const Collaborator = require('../models/Collaborator')
 
 //listar collaboradores
 const getListCollaborator = (request, response) => {
@@ -17,7 +17,7 @@ const getListCollaborator = (request, response) => {
 };
 
 //cadastrar colabolarador
-const postCollaborator = (request, response) => {
+const postCollaborator = async (request, response) => {
     const {
         name,
         cpf,
@@ -28,13 +28,23 @@ const postCollaborator = (request, response) => {
         endtexpedient,
         startlunch,
         endlunch,
+        id_admin
     }  = request.body;
-
-    console.log(name);
 
     const id = crypto.randomBytes(4).toString('hex');
 
-    return response.json({ id }); //colocar api de e-mail
+    const collaborator = await Collaborator.create({ name,
+        cpf,
+        email,
+        phone,
+        occupation,
+        startexpedient,
+        endtexpedient,
+        startlunch,
+        endlunch,
+        id_admin });
+
+    return response.json(collaborator); //colocar api de e-mail
 };
 
 //registrar ponto
