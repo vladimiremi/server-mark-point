@@ -106,11 +106,31 @@ const putCollaborator = async (request, response) => {
     return response.json(collaborator);
 }
 
+// login do Colaborador
+const loginCollaborator = async (request, response) => {
+    const { password, email } = request.body;
+
+    const collaborator = await Collaborator.findAll({
+        where: {
+            password: password,
+            email: email
+        }
+    })
+
+    console.log(collaborator);
+
+    if(collaborator == false) {
+        return response.status(400).json({error: 'Não existe agricultor com esse ID'});
+    }
+    return response.json(collaborator);
+}
+
 
 module.exports = {
     postCollaborator, 
     getListCollaborator,
-    putCollaborator 
+    putCollaborator,
+    loginCollaborator
 };
 
 //atulizar o ponto cadastrado
