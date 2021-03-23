@@ -1,7 +1,6 @@
 const crypto = require('crypto');
 
 const Collaborator = require('../models/Collaborator');
-const Point = require('../models/Point');
 
 //listar collaboradores
 const getListCollaborator = async (request, response) => {

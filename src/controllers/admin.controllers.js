@@ -20,6 +20,25 @@ const postAdmin = async (request, response) => {
     return response.json(admin);
 };
 
+
+// login do Administrador
+const loginAdmin = async (request, response) => {
+    const { password, email } = request.body;
+
+    const admin = await Admin.findAll({
+        where: {
+            password: password,
+            email: email
+        }
+    })
+
+    if(!admin) {
+        return response.status(400).json({error: 'Não existe agricultor com esse ID'});
+    }
+    return response.json(admin);
+}
+
 module.exports = {
-    postAdmin
+    postAdmin,
+    loginAdmin
 };
