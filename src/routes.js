@@ -7,7 +7,8 @@ const {
 
 const { 
     postCollaborator, 
-    getListCollaborator, 
+    getListCollaborator,
+    putCollaborator
 } = require('./controllers/collaborator.controllers');
 
 const {postAdmin} = require('../src/controllers/admin.controllers');
@@ -15,6 +16,8 @@ const {postAdmin} = require('../src/controllers/admin.controllers');
 const routes = express.Router();
 
 routes.get('/list-collaborator', getListCollaborator);
+
+routes.put('/list-collaborator/:id', putCollaborator);
 
 routes.get('/list-points', getListPointCollaborator);
 

@@ -8,7 +8,8 @@ const getListCollaborator = async (request, response) => {
     const idAdmin = request.headers.authorization;
     const colabolarador = await Collaborator.findAll({
         where: {
-            id_admin: idAdmin
+            id_admin: idAdmin,
+            active: true
         }
     });
 
@@ -51,10 +52,66 @@ const postCollaborator = async (request, response) => {
     return response.json(collaborator); //colocar api de e-mail
 };
 
+//atualiza o colaborador
+const putCollaborator = async (request, response) => {
+    const { id } = request.params;
+    const idAdmin = request.headers.authorization;
+    const {
+        name,
+        cpf,
+        email,
+        password,
+        phone,
+        occupation,
+        startexpedient,
+        endtexpedient,
+        startlunch,
+        endlunch,
+        active} = request.body;
+
+    //retorno o id do admin
+    const collaborator = await Collaborator.findAll({
+        where: {
+            id: id
+        }
+    });
+    console.log("collaborator.id_admin:" + collaborator[0].id_admin);
+    console.log("Admin:"+idAdmin);
+    console.log("Collaborator"+id);
+    
+
+    console.log(collaborator);
+
+    // verifica se é o adimistrador que cadastrou que está tentando excluir
+    if( collaborator[0].id_admin !== idAdmin) {
+        return response.status(401).json({error: 'Operação não permitida.'});
+    }
+
+    const test = await Collaborator.update(
+        {   name,
+            cpf,
+            email,
+            password,
+            phone,
+            occupation,
+            startexpedient,
+            endtexpedient,
+            startlunch,
+            endlunch,
+            active},
+        {where: {id: id}}
+    )
+
+    console.log(test);
+    
+    return response.json(collaborator);
+}
+
 
 module.exports = {
     postCollaborator, 
-    getListCollaborator, 
+    getListCollaborator,
+    putCollaborator 
 };
 
 //atulizar o ponto cadastrado

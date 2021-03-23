@@ -13,7 +13,8 @@ class Collaborator extends Model {
             endtexpedient: DataTypes.TIME,
             startlunch: DataTypes.TIME,
             endlunch: DataTypes.TIME,
-            id_admin: DataTypes.STRING
+            id_admin: DataTypes.STRING,
+            active: DataTypes.BOOLEAN
         }, {
             sequelize,
             tableName: 'collaborator',
