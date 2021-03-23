@@ -1,23 +1,22 @@
-const { response } = require('express') ;
-const express = require('express') ;
 
+const express = require('express') ;
 
 const { 
     postCollaborator, 
     getListCollaborator, 
-    getInformationsCollaborator,
-    postPoint 
-} = require('../src/controllers/index.controllers');
+} = require('./controllers/collaborator.controllers');
+
+
 
 const routes = express.Router();
 
-routes.get('/list', getListCollaborator);
+routes.get('/list-collaborator', getListCollaborator);
 
-routes.post('/register', postCollaborator);
 
-routes.post('/point', postPoint);
 
-routes.get('/collaborator', getInformationsCollaborator);
+routes.post('/register-collaborator', postCollaborator);
+
+
 
 
 module.exports = routes;
