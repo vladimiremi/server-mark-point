@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { response } = require('express');
 
 const Collaborator = require('../models/Collaborator');
 
@@ -26,9 +27,10 @@ const postCollaborator = async (request, response) => {
         startexpedient,
         endtexpedient,
         startlunch,
-        endlunch,
-        id_admin
+        endlunch
     }  = request.body;
+
+    const id_admin = request.headers.authorization;
 
 
     const password = crypto.randomBytes(4).toString('hex');
@@ -125,12 +127,29 @@ const loginCollaborator = async (request, response) => {
     return response.json(collaborator);
 }
 
+// Listar dados de um único colaborador
+const getInformationsCollaborator = async (request, response) => {
+    const { id } = request.params;
+    const idAdmin = request.headers.authorization;
+
+    const informationCollaborator = await Collaborator.findAll({
+        where: {
+            id: id,
+            id_admin: idAdmin
+        }
+    });
+    
+
+    return response.json(informationCollaborator);
+}
+
 
 module.exports = {
     postCollaborator, 
     getListCollaborator,
     putCollaborator,
-    loginCollaborator
+    loginCollaborator,
+    getInformationsCollaborator
 };
 
 //atulizar o ponto cadastrado

@@ -9,7 +9,8 @@ const {
     postCollaborator, 
     getListCollaborator,
     putCollaborator,
-    loginCollaborator
+    loginCollaborator,
+    getInformationsCollaborator
 } = require('./controllers/collaborator.controllers');
 
 const {postAdmin, loginAdmin} = require('../src/controllers/admin.controllers');
@@ -23,6 +24,7 @@ routes.post('/register-collaborator', postCollaborator);
 routes.post('/session-collaborator', loginCollaborator);
 routes.put('/list-collaborator/:id', putCollaborator);
 routes.get('/list-collaborator', getListCollaborator);
+routes.get('/informations-collaborator/:id', getInformationsCollaborator);
 
 routes.post('/register-admin', postAdmin);
 routes.post('/session-admin', loginAdmin);
