@@ -33,7 +33,7 @@ const loginAdmin = async (request, response) => {
     })
 
     if(admin == false) {
-        return response.status(400).json({error: 'Não existe agricultor com esse ID'});
+        return response.status(400).json({error: 'Não existe Administrador com essas credenciais'});
     }
     return response.json(admin);
 }

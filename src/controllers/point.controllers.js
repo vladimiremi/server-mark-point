@@ -10,6 +10,7 @@ const postPoint = async ( request, response ) => {
     const {latitude, longitude} = request.body;
     const id_collaborator = request.headers.authorization;
     const timestring = moment().format('YYYY-MM-DD[T]HH:mm:ss');
+    const NUM_POINS_DAY = 24;
     
     const Op = Sequelize.Op;              // biblioteca de operadores
     const query = `${timestring.slice(0, 10)}%`; // string de consulta
@@ -22,9 +23,11 @@ const postPoint = async ( request, response ) => {
             id_collaborator: id_collaborator
         } 
     });
+
+    console.log(daypoints.length)
     
     //só permite cadastrar 4 pontos em um dia.
-    if (daypoints < 4) {
+    if (daypoints.length < NUM_POINS_DAY) {
         //cria o ponto
         const point = await Point.create({ 
             id_collaborator, 
@@ -58,9 +61,11 @@ const postPoint = async ( request, response ) => {
 //listar os pontos do colaborador
 const getListPointCollaborator = async (request, response) => {
     const IdCollaborator = request.headers.authorization;
+
     const points = await Point.findAll({
         where: {
-            id_collaborator: IdCollaborator
+            id_collaborator: IdCollaborator,
+
         }
     });
 
