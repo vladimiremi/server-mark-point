@@ -22,7 +22,7 @@ routes.post('/new-point', postPoint);
 
 routes.post('/register-collaborator', postCollaborator);
 routes.post('/session-collaborator', loginCollaborator);
-routes.put('/list-collaborator/:id', putCollaborator);
+routes.put('/update-collaborator/:id', putCollaborator);
 routes.get('/list-collaborator', getListCollaborator);
 routes.get('/informations-collaborator/:id', getInformationsCollaborator);
 

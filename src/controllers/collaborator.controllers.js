@@ -13,6 +13,8 @@ const getListCollaborator = async (request, response) => {
         }
     });
 
+    console.log(colabolarador);
+
     return response.json(colabolarador);
 };
 
@@ -76,19 +78,19 @@ const putCollaborator = async (request, response) => {
             id: id
         }
     });
-    console.log("collaborator.id_admin:" + collaborator[0].id_admin);
-    console.log("Admin:"+idAdmin);
-    console.log("Collaborator"+id);
+    // console.log("collaborator.id_admin:" + collaborator[0].id_admin);
+    // console.log("Admin:"+idAdmin);
+    // console.log("Collaborator"+id);
     
 
-    console.log(collaborator);
+    // console.log(collaborator);
 
     // verifica se é o adimistrador que cadastrou que está tentando excluir
     if( collaborator[0].id_admin !== idAdmin) {
         return response.status(401).json({error: 'Operação não permitida.'});
     }
 
-    const test = await Collaborator.update(
+    const collaborator = await Collaborator.update(
         {   name,
             cpf,
             email,
@@ -103,7 +105,6 @@ const putCollaborator = async (request, response) => {
         {where: {id: id}}
     )
 
-    console.log(test);
     
     return response.json(collaborator);
 }
@@ -151,41 +152,3 @@ module.exports = {
     loginCollaborator,
     getInformationsCollaborator
 };
-
-//atulizar o ponto cadastrado
-
-// const putPoint = async (request, response) => {
-//     const { id } = request.params;
-//     const idCollaborator = request.headers.authorization;
-
-//     const point = await Point.findAll({
-//         where: {
-//             id_collaborator: idCollaborator
-//         }
-//     });
-
-//     if(point.id_collaborator !== idCollaborator) {
-//         return response.status(401).json({error: 'Operação não permitida.'});
-//     }
-
-//     await Point.update({
-//         where: {
-//             id: id,
-//         }
-//     })
-
-
-
-// }
-
-
-
-
-
-
-//informações do colaborador
-
-
-
-
-
