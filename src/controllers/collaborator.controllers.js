@@ -90,7 +90,7 @@ const putCollaborator = async (request, response) => {
         return response.status(401).json({error: 'Operação não permitida.'});
     }
 
-    const collaborator = await Collaborator.update(
+    const updateCollaborator = await Collaborator.update(
         {   name,
             cpf,
             email,
@@ -106,7 +106,7 @@ const putCollaborator = async (request, response) => {
     )
 
     
-    return response.json(collaborator);
+    return response.json(updateCollaborator);
 }
 
 // login do Colaborador
@@ -144,11 +144,28 @@ const getInformationsCollaborator = async (request, response) => {
     return response.json(informationCollaborator);
 }
 
+//Listar dados no mobile
+
+const getInformationsCollaboratorMobile = async (request, response) => {
+
+    const id = request.headers.authorization;
+
+    const informationCollaborator = await Collaborator.findAll({
+        where: {
+            id: id,
+        }
+    });
+    
+
+    return response.json(informationCollaborator);
+}
+
 
 module.exports = {
     postCollaborator, 
     getListCollaborator,
     putCollaborator,
     loginCollaborator,
-    getInformationsCollaborator
+    getInformationsCollaborator,
+    getInformationsCollaboratorMobile,
 };

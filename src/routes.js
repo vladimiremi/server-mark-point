@@ -10,7 +10,8 @@ const {
     getListCollaborator,
     putCollaborator,
     loginCollaborator,
-    getInformationsCollaborator
+    getInformationsCollaborator,
+    getInformationsCollaboratorMobile
 } = require('./controllers/collaborator.controllers');
 
 const {postAdmin, loginAdmin} = require('../src/controllers/admin.controllers');
@@ -25,6 +26,7 @@ routes.post('/session-collaborator', loginCollaborator);
 routes.put('/update-collaborator/:id', putCollaborator);
 routes.get('/list-collaborator', getListCollaborator);
 routes.get('/informations-collaborator/:id', getInformationsCollaborator);
+routes.get('/informations-collaborator-mobile', getInformationsCollaboratorMobile);
 
 routes.post('/register-admin', postAdmin);
 routes.post('/session-admin', loginAdmin);

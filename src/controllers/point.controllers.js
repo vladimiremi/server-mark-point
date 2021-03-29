@@ -39,7 +39,10 @@ const postPoint = async ( request, response ) => {
         const seePoint = await Point.findAll({
             where: {
                 id: point.id
-            }
+            },
+            order: [
+                ['updateAt', 'DESC']
+            ],
         });
 
         return response.json(seePoint);
